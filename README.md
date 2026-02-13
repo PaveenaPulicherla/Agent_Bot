@@ -60,8 +60,7 @@ discord-qa-agent-bot/
 │   ├── assignment-writeup.md
 │   ├── architecture-diagram.md
 │   ├── reflection.md
-│   ├── comparison-discord-vs-copilot.md
-│   └── screenshots/
+│   
 │
 ├── src/
 │   ├── commands/
@@ -69,8 +68,7 @@ discord-qa-agent-bot/
 │   │   ├── hallucination.py
 │   │   ├── compliance.py
 │   │   └── qareport.py
-│   └── utils/
-│       └── helpers.py
+│   
 │
 └── .gitignore
 
