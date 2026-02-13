@@ -1,26 +1,57 @@
 # Architecture Diagram
-
-                   +-----------------------------+
-                   |   Discord User              |
-                   +--------------+--------------+
-                                  |
-                                  v
-                   +-----------------------------+
-                   |   Discord Bot (Python)      |
-                   |  - Command Handler          |
-                   |  - Evaluation Logic         |
-                   +--------------+--------------+
-                                  |
-                                  v
-                   +-----------------------------+
-                   |   Agentic QA Functions      |
-                   |  - Test Case Generator      |
-                   |  - Hallucination Checker    |
-                   |  - Compliance Evaluator     |
-                   |  - QA Report Builder        |
-                   +--------------+--------------+
-                                  |
-                                  v
-                   +-----------------------------+
-                   |   Discord Server Channel    |
-                   +-----------------------------+
+                          ┌──────────────────────────────┐
+                          │     User in Discord Server    │
+                          │    │
+                          └───────────────┬──────────────┘
+                                          │
+                                          ▼
+                     ┌────────────────────────────────────────┐
+                     │    QA-Agent-Bot (Discord Bot)       │
+                     │  Command Parser + Intent Detection      │
+                     └───────────────┬────────────────────────┘
+                                     │
+                                     ▼
+                     ┌────────────────────────────────────────┐
+                     │      Fraud Test Case Generator          │
+                     │  • Velocity anomalies                   │
+                     │  • Geolocation mismatch                 │
+                     │  • Device fingerprint mismatch          │
+                     │  • Mule account pattern                 │
+                     │  • Behavioral anomaly                   │
+                     │  • ATO indicators                       │
+                     └───────────────┬────────────────────────┘
+                                     │
+                                     ▼
+                     ┌────────────────────────────────────────┐
+                     │   Session Test Case Store (In‑Memory)   │
+                     │  Stores generated test cases per user   │
+                     └───────────────┬────────────────────────┘
+                                     │
+                                     ▼
+                     ┌────────────────────────────────────────┐
+                     │        Fraud Test Executor              │
+                     │  • Simulated PASS/FAIL outcomes         │
+                     │  • Weighted randomness (fraud edge)     │
+                     │  • Logs execution results               │
+                     └───────────────┬────────────────────────┘
+                                     │
+                                     ▼
+                     ┌────────────────────────────────────────┐
+                     │   Session Execution Results Store       │
+                     │  Stores PASS/FAIL outcomes per user     │
+                     └───────────────┬────────────────────────┘
+                                     │
+                                     ▼
+                     ┌────────────────────────────────────────┐
+                     │       Fraud QA Report Builder           │
+                     │  • Total tests                          │
+                     │  • Pass/Fail summary                    │
+                     │  • Detailed fraud scenario analysis     │
+                     │  • Expected vs. actual behavior         │
+                     └───────────────┬────────────────────────┘
+                                     │
+                                     ▼
+                          ┌──────────────────────────────┐
+                          │   Response Back to Discord    │
+                          │  (Report, Scores, Insights)   │
+                          └──────────────────────────────┘
